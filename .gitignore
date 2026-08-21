@@ -23,6 +23,9 @@ lerna-debug.log*
 # IDEs and editors
 /.idea
 .project
+.agents
+.claude
+.windsurf
 .classpath
 .c9/
 *.launch
@@ -55,3 +58,5 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+/generated/prisma
