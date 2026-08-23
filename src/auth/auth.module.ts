@@ -2,18 +2,21 @@ import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtModule } from '@nestjs/jwt'
 import { Env } from 'src/env'
+import { AuthController } from '../controllers/auth.controller'
+import { PrismaModule } from '../prisma/prisma.module'
 
 @Module({
   imports: [
+    PrismaModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory(config: ConfigService<Env, true>) {
         const privateKey = Buffer.from(
-          config.get('JWT_PRIVATE_KEY_BASE64', { infer: true }),
+          config.get('JWT_PRIVATE_KEY', { infer: true }),
           'base64',
         ).toString('utf8')
         const publicKey = Buffer.from(
-          config.get('JWT_PUBLIC_KEY_BASE64', { infer: true }),
+          config.get('JWT_PUBLIC_KEY', { infer: true }),
           'base64',
         ).toString('utf8')
 
@@ -27,5 +30,6 @@ import { Env } from 'src/env'
       },
     }),
   ],
+  controllers: [AuthController],
 })
 export class AuthModule {}
