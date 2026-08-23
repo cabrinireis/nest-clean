@@ -51,6 +51,7 @@ lerna-debug.log*
 .tmp
 
 # Runtime data
+keys/
 pids
 *.pid
 *.seed
