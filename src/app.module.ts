@@ -5,6 +5,7 @@ import { envSchema } from './env'
 import { PrismaModule } from './prisma/prisma.module'
 import { AuthModule } from './auth/auth.module'
 import { CreateQuestionController } from './controllers/create-question.controller'
+import { ListQuestionsController } from './controllers/list-questions.controller'
 
 @Module({
   imports: [
@@ -15,6 +16,10 @@ import { CreateQuestionController } from './controllers/create-question.controll
     PrismaModule,
     AuthModule,
   ],
-  controllers: [CreateAccountController, CreateQuestionController],
+  controllers: [
+    CreateAccountController,
+    CreateQuestionController,
+    ListQuestionsController,
+  ],
 })
 export class AppModule {}
