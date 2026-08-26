@@ -57,6 +57,23 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
+### E2E database
+
+E2E tests use a dedicated PostgreSQL database named `nest-clean_test`. Copy
+`.env.test.example` to `.env.test` and keep the file local; it is ignored by
+Git. Start PostgreSQL with Docker, then run:
+
+```bash
+$ pnpm run db:test:prepare
+$ pnpm run test:e2e
+```
+
+The test command loads `.env.test` and creates the database if necessary. Each
+E2E file then receives a unique PostgreSQL schema, applies the existing Prisma
+migrations to that schema, and removes it after the suite finishes. This lets
+Vitest run suites in parallel without sharing test data. The preparation script
+refuses URLs whose database name does not end in `_test`.
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
