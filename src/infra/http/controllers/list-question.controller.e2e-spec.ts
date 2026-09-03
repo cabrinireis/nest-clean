@@ -64,6 +64,7 @@ describe('Create question (E2E)', () => {
     const response = await request(app.getHttpServer())
       .get('/questions')
       .set('Authorization', `Bearer ${accessToken}`)
+      .send()
 
     expect(response.status).toBe(200)
 
