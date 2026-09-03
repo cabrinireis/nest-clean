@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtModule } from '@nestjs/jwt'
-import { Env } from 'src/env'
-import { AuthController } from '../controllers/auth.controller'
+import { Env } from '@/infra/env'
+import { AuthController } from '../http/controllers/auth.controller'
 import { PrismaModule } from '../prisma/prisma.module'
 import { JwtStrategy } from './jwt.strategy'
 
