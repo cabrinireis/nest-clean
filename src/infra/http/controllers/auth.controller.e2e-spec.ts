@@ -2,10 +2,10 @@ import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
 import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/prisma/prisma.service'
 import { hash } from 'bcryptjs'
 import type { Server } from 'node:http'
 import { randomUUID } from 'node:crypto'
+import { PrismaService } from '@/infra/database/prisma.service'
 
 describe('Auth (E2E)', () => {
   let app: INestApplication

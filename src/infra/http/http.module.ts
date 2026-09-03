@@ -1,17 +1,15 @@
-import { Module } from "@nestjs/common";
-import { ListQuestionsController } from "./controllers/list-questions.controller";
-import { CreateQuestionController } from "./controllers/create-question.controller";
+import { Module } from '@nestjs/common'
+import { ListQuestionsController } from './controllers/list-questions.controller'
+import { CreateQuestionController } from './controllers/create-question.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
-import { PrismaService } from "../prisma/prisma.service";
+import { DatabaseModule } from '../database/database.module'
 
 @Module({
-    controllers: [
-        CreateAccountController,
-        CreateQuestionController,
-        ListQuestionsController,
-    ],
-    providers: [PrismaService]
+  imports: [DatabaseModule],
+  controllers: [
+    CreateAccountController,
+    CreateQuestionController,
+    ListQuestionsController,
+  ],
 })
-export class HttpModule {
-
-}
+export class HttpModule {}
