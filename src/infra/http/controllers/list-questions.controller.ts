@@ -3,6 +3,7 @@ import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { z } from 'zod'
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions'
+import { QuestionPresenter } from '../presenter/question-presenter'
 
 const pageQueryParamSchema = z
   .string()
@@ -20,7 +21,16 @@ export class ListQuestionsController {
   constructor(private fetchRecentQuestions: FetchRecentQuestionsUseCase) {}
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
-    const questions = await this.fetchRecentQuestions.execute({ page })
-    return { questions }
+    const result = await this.fetchRecentQuestions.execute({ page })
+    if (result.isLeft()) {
+      throw new Error('Error fetching recent questions')
+    }
+
+    const questions = result.value.questions
+    return {
+      questions: questions.map((question) =>
+        QuestionPresenter.toHTTP(question),
+      ),
+    }
   }
 }
